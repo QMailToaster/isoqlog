@@ -87,7 +87,7 @@ install -d                   %{buildroot}%{basedir}/include
 install -m644 isoqlog.module %{buildroot}%{basedir}/include
 
 install -Dp %{_sourcedir}/isoqlog.conf \
-            %{buildroot}%{_sysconfdir}/%{name}
+            %{buildroot}%{_sysconfdir}/%{name}/isoqlog.conf
 install -Dp %{_sourcedir}/isoqlog.cron.sh \
             %{buildroot}%{isoqdir}/bin/cron.sh
 
