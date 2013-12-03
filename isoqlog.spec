@@ -80,23 +80,23 @@ rm -rf %{buildroot}
 make DESTDIR="%{buildroot}" install
 
 # Write the module into the control panel
-install %{_sourcedir}/isoqlog.module  $RPM_BUILD_DIR/%{name}-%{version}/.
+install %{_sourcedir}/isoqlog.module  $RPM_BUILD_DIR/%{name}-%{version}
 
 install -d                   %{buildroot}%{_docdir}/%{name}
 install -d                   %{buildroot}%{basedir}/include
 install -m644 isoqlog.module %{buildroot}%{basedir}/include
 
 install -Dp %{_sourcedir}/isoqlog.conf \
-            %{buildroot}%{_sysconfdir}/%{name}/.
+            %{buildroot}%{_sysconfdir}/%{name}
 install -Dp %{_sourcedir}/isoqlog.cron.sh \
             %{buildroot}%{isoqdir}/bin/cron.sh
 
 #mv %{buildroot}/%{basedir}/doc/isoqlog/* %{buildroot}/%{_docdir}/%{name}/
 
-mv %{buildroot}/usr/etc/isoqlog.conf-dist %{buildroot}/%{_sysconfdir}/%{name}/.
-mv %{buildroot}/usr/etc/isoqlog.domains-dist %{buildroot}/%{_sysconfdir}/%{name}/.
+mv %{buildroot}/usr/etc/isoqlog.conf-dist %{buildroot}/%{_sysconfdir}/%{name}
+mv %{buildroot}/usr/etc/isoqlog.domains-dist %{buildroot}/%{_sysconfdir}/%{name}
 
-install -Dp %{_sourcedir}/*.html  %{buildroot}%{_datadir}/%{name}/htmltemp/.
+install -Dp %{_sourcedir}/*.html  %{buildroot}%{_datadir}/%{name}/htmltemp
 
 #----------------------------------------------------------------------------
 %clean
