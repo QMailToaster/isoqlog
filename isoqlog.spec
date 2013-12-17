@@ -6,18 +6,18 @@ License:	BSD
 Group:		Monitoring
 URL:		http://www.enderunix.org/isoqlog/
 Source0:	http://www.enderunix.org/isoqlog/isoqlog-%{version}.tar.gz
-Source1:	isoqlog.conf
-Source2:	isoqlog.cron.sh
-Source3:	isoqlog.module
-Source4:	daily.html
+Source1:	isoqlog.module
+Source2:	isoqlog.conf
+Source3:	isoqlog.cron.sh
+Source4:	index.html
 Source5:	days.html
 Source6:	domain.html
-Source7:	generaldaily.html
-Source8:	generaldomain.html
-Source9:	generalmonthly.html
-Source10:	generalyearly.html
-Source11:	index.html
-Source12:	monthly.html
+Source7:	daily.html
+Source8:	monthly.html
+Source9:	generaldomain.html
+Source10:	generaldaily.html
+Source11:	generalmonthly.html
+Source12:	generalyearly.html
 Requires:	control-panel-toaster
 Obsoletes:	isoqlog-toaster
 Obsoletes:	isoqlog-toaster-doc
@@ -80,23 +80,34 @@ rm -rf %{buildroot}
 make DESTDIR="%{buildroot}" install
 
 # Write the module into the control panel
-install %{_sourcedir}/isoqlog.module  $RPM_BUILD_DIR/%{name}-%{version}
+# (shubes) Why?
+#install %{SOURCE1}  %{_builddir}/%{name}-%{version}
 
-install -d                   %{buildroot}%{_docdir}/%{name}
-install -d                   %{buildroot}%{basedir}/include
-install -m644 isoqlog.module %{buildroot}%{basedir}/include
+install -d              %{buildroot}%{_docdir}/%{name}
+install -d              %{buildroot}%{basedir}/include
+install     %{SOURCE1}  %{buildroot}%{basedir}/include
 
-install -Dp %{_sourcedir}/isoqlog.conf \
-            %{buildroot}%{_sysconfdir}/%{name}/isoqlog.conf
-install -Dp %{_sourcedir}/isoqlog.cron.sh \
-            %{buildroot}%{isoqdir}/bin/cron.sh
+install -Dp %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}/isoqlog.conf
+install -Dp %{SOURCE3}  %{buildroot}%{isoqdir}/bin/cron.sh
 
 #mv %{buildroot}/%{basedir}/doc/isoqlog/* %{buildroot}/%{_docdir}/%{name}/
 
-mv %{buildroot}/usr/etc/isoqlog.conf-dist %{buildroot}/%{_sysconfdir}/%{name}
+mv %{buildroot}/usr/etc/isoqlog.conf-dist    %{buildroot}/%{_sysconfdir}/%{name}
 mv %{buildroot}/usr/etc/isoqlog.domains-dist %{buildroot}/%{_sysconfdir}/%{name}
 
-install -Dp %{_sourcedir}/*.html  %{buildroot}%{_datadir}/%{name}/htmltemp
+install -Dp %{SOURCE4} %{buildroot}%{_datadir}/%{name}/htmltemp/index.html
+install -p  %{SOURCE5} %{buildroot}%{_datadir}/%{name}/htmltemp/days.html
+install -p  %{SOURCE6} %{buildroot}%{_datadir}/%{name}/htmltemp/domain.html
+install -p  %{SOURCE7} %{buildroot}%{_datadir}/%{name}/htmltemp/daily.html
+install -p  %{SOURCE8} %{buildroot}%{_datadir}/%{name}/htmltemp/monthly.html
+install -p  %{SOURCE9} \
+      %{buildroot}%{_datadir}/%{name}/htmltemp/generaldomain.html
+install -p  %{SOURCE10} \
+      %{buildroot}%{_datadir}/%{name}/htmltemp/generaldaily.html
+install -p  %{SOURCE11} \
+      %{buildroot}%{_datadir}/%{name}/htmltemp/generalmonthly.html
+install -p  %{SOURCE12} \
+      %{buildroot}%{_datadir}/%{name}/htmltemp/generalyearly.html
 
 #----------------------------------------------------------------------------
 %clean
