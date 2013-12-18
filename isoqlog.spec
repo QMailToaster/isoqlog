@@ -18,7 +18,7 @@ Source9:	generaldomain.html
 Source10:	generaldaily.html
 Source11:	generalmonthly.html
 Source12:	generalyearly.html
-Requires:	control-panel-toaster
+Requires:	control-panel
 Obsoletes:	isoqlog-toaster
 Obsoletes:	isoqlog-toaster-doc
 BuildRoot:      %{_topdir}/BUILDROOT/%{name}-%{version}-%{release}.%{_arch}
