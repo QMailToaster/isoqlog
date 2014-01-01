@@ -1,27 +1,29 @@
-Name:		isoqlog
-Summary:	Isoqlog is an MTA log analysis program written in C.
-Version:	2.2.1
-Release:	0%{?dist}
-License:	BSD
-Group:		Monitoring
-URL:		http://www.enderunix.org/isoqlog/
-Source0:	http://www.enderunix.org/isoqlog/isoqlog-%{version}.tar.gz
-Source1:	isoqlog.module
-Source2:	isoqlog.conf
-Source3:	isoqlog.cron.sh
-Source4:	index.html
-Source5:	days.html
-Source6:	domain.html
-Source7:	daily.html
-Source8:	monthly.html
-Source9:	generaldomain.html
-Source10:	generaldaily.html
-Source11:	generalmonthly.html
-Source12:	generalyearly.html
-Requires:	control-panel
-Obsoletes:	isoqlog-toaster
-Obsoletes:	isoqlog-toaster-doc
-BuildRoot:      %{_topdir}/BUILDROOT/%{name}-%{version}-%{release}.%{_arch}
+Name:      isoqlog
+Summary:   Isoqlog is an MTA log analysis program written in C.
+Version:   2.2.1
+Release:   0%{?dist}
+License:   BSD
+Group:	   Monitoring
+Vendor:    QmailToaster
+Packager:  Eric Shubert <qmt-build@datamatters.us>
+URL:       http://www.enderunix.org/isoqlog/
+Source0:   http://www.enderunix.org/isoqlog/isoqlog-%{version}.tar.gz
+Source1:   isoqlog.module
+Source2:   isoqlog.conf
+Source3:   isoqlog.cron.sh
+Source4:   index.html
+Source5:   days.html
+Source6:   domain.html
+Source7:   daily.html
+Source8:   monthly.html
+Source9:   generaldomain.html
+Source10:  generaldaily.html
+Source11:  generalmonthly.html
+Source12:  generalyearly.html
+Requires:  control-panel
+Obsoletes: isoqlog-toaster
+Obsoletes: isoqlog-toaster-doc
+BuildRoot: %{_topdir}/BUILDROOT/%{name}-%{version}-%{release}.%{_arch}
 
 %define apacheuser    apache
 %define apachegroup   apache
