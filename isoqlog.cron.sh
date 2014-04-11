@@ -3,6 +3,7 @@
 VPOPMAIL=/home/vpopmail/domains
 ISOQLOG=`which isoqlog`
 ISODOMAINS=/etc/isoqlog/isoqlog.domains
+ISOCONF=/etc/isoqlog/isoqlog.conf
 RM=`which rm`
 TOUCH=`which touch`
 CHOWN=`which chown`
@@ -17,7 +18,7 @@ for i in `ls $VPOPMAIL`; do
 done
 
 # Execute the program
-$ISOQLOG 1>/dev/null 2>/dev/null
+$ISOQLOG -f $ISOCONF 1>/dev/null 2>&1
 
 # Correct permissions
 $CHOWN -R %{apacheuser}:%{apachegroup} /usr/share/toaster/htdocs/isoqlog
