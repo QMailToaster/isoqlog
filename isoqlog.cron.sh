@@ -1,24 +1,12 @@
 #!/bin/sh
 
-VPOPMAIL=/home/vpopmail/domains
-ISOQLOG=`which isoqlog`
-ISODOMAINS=/etc/isoqlog/isoqlog.domains
-ISOCONF=/etc/isoqlog/isoqlog.conf
-RM=`which rm`
-TOUCH=`which touch`
-CHOWN=`which chown`
-CHMOD=`which chmod`
+confdir=/etc/isoqlog
 
-# Remove old domains
-[ -f $ISODOMAINS ] && $RM -rf $ISODOMAINS
-
-# Regenerate the file
-for i in `ls $VPOPMAIL`; do
-  echo "$i" >> $ISODOMAINS;
-done
+# Generate the domains file
+ls /home/vpopmail/domains >$confdir/isoqlog.domains
 
 # Execute the program
-$ISOQLOG -f $ISOCONF 1>/dev/null 2>&1
+isoqlog -f $confdir/isoqlog.conf >/dev/null 2>&1
 
 # Correct permissions
-$CHOWN -R %{apacheuser}:%{apachegroup} /usr/share/toaster/htdocs/isoqlog
+chown -R apache:apache /usr/share/isoqlog/htdocs
