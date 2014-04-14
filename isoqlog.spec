@@ -1,7 +1,8 @@
+# TODO: move output file out from under toaster
 Name:      isoqlog
 Summary:   Isoqlog is an MTA log analysis program written in C.
 Version:   2.2.1
-Release:   0%{?dist}
+Release:   1%{?dist}
 License:   BSD
 Group:	   Monitoring
 Vendor:    QmailToaster
