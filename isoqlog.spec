@@ -149,7 +149,7 @@ fi
 %attr(0644,root,root) %doc %{_docdir}/%{name}/*
 
 %attr(0644,root,root) %config(noreplace)      %{_sysconfdir}/%{name}/*
-%attr(0644,root,root) %config                 %{_sysconfdir}/httpd/conf.d/%{name}.conf/*
+%attr(0644,root,root) %config                 %{_sysconfdir}/httpd/conf.d/%{name}.conf
 %attr(0755,root,root)                         %{_bindir}/%{name}
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{isoqdir}
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{isoqdir}/bin
