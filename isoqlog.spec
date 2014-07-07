@@ -160,6 +160,8 @@ fi
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/htmltemp/library
 %attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htdocs/*
 %attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htmltemp/*.html
+%attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htmltemp/images/*
+%attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htmltemp/library/*
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/lang
 %attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/lang/*
 %attr(0755,root,root)                    %dir %{_docdir}/%{name}/tr
