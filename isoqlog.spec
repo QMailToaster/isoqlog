@@ -1,4 +1,3 @@
-# TODO: move output file out from under toaster
 Name:      isoqlog
 Summary:   Isoqlog is an MTA log analysis program written in C.
 Version:   2.2.1
@@ -21,6 +20,7 @@ Source9:   generaldomain.html
 Source10:  generaldaily.html
 Source11:  generalmonthly.html
 Source12:  generalyearly.html
+Source13:  isoqlog.httpd.conf
 Requires:  control-panel
 Obsoletes: isoqlog-toaster
 Obsoletes: isoqlog-toaster-doc
@@ -88,8 +88,10 @@ make DESTDIR="%{buildroot}" install
 
 install -d              %{buildroot}%{_docdir}/%{name}
 install -d              %{buildroot}%{basedir}/include
+install -d              %{buildroot}%{_datadir}/%{name}/htdocs
 install     %{SOURCE1}  %{buildroot}%{basedir}/include
 
+install -Dp %{SOURCE13} %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
 install -Dp %{SOURCE2}  %{buildroot}%{_sysconfdir}/%{name}/isoqlog.conf
 install -Dp %{SOURCE3}  %{buildroot}%{isoqdir}/bin/cron.sh
 
@@ -111,6 +113,9 @@ install -p  %{SOURCE11} \
       %{buildroot}%{_datadir}/%{name}/htmltemp/generalmonthly.html
 install -p  %{SOURCE12} \
       %{buildroot}%{_datadir}/%{name}/htmltemp/generalyearly.html
+
+%{__ln_s} ../htmltemp/images    %{buildroot}%{_datadir}/%{name}/htdocs/
+%{__ln_s} ../htmltemp/library   %{buildroot}%{_datadir}/%{name}/htdocs/
 
 #----------------------------------------------------------------------------
 %clean
@@ -144,13 +149,16 @@ fi
 %attr(0644,root,root) %doc %{_docdir}/%{name}/*
 
 %attr(0644,root,root) %config(noreplace)      %{_sysconfdir}/%{name}/*
+%attr(0644,root,root) %config                 %{_sysconfdir}/httpd/conf.d/%{name}.conf/*
 %attr(0755,root,root)                         %{_bindir}/%{name}
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{isoqdir}
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{isoqdir}/bin
 %attr(0755,root,root)                         %{isoqdir}/bin/cron.sh
+%attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/htdocs
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/htmltemp
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/htmltemp/images
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/htmltemp/library
+%attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htdocs/*
 %attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/htmltemp/*
 %attr(0755,%{apacheuser},%{apachegroup}) %dir %{_datadir}/%{name}/lang
 %attr(0644,%{apacheuser},%{apachegroup})      %{_datadir}/%{name}/lang/*
@@ -160,6 +168,10 @@ fi
 #----------------------------------------------------------------------------"
 %changelog
 #----------------------------------------------------------------------------
+* Mon Jul  7 2014 Eric Shubert <eric@datamatters.us> 2.2.1-1.qt
+- Fixed some bugs
+- Changed location of some components, removing toaster directory
+- Created /etc/httpd/conf.d/isoqlog.conf to it's not in control-panel
 * Fri Nov 15 2013 Eric Shubert <eric@datamatters.us> 2.2.1-0.qt
 - Migrated to github
 - Removed -toaster designation
